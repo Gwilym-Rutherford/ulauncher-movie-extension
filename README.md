@@ -1,5 +1,6 @@
 # Dependencies
 - [Webtorrent CLI](https://github.com/webtorrent/webtorrent-cli)
+- [VLC](https://www.videolan.org/vlc/)
 - Possibly a VPN
 
 # Usage
