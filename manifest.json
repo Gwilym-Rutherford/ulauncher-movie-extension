@@ -1,0 +1,56 @@
+{
+    "required_api_version": "^2.0.0",
+    "name": "Movies",
+    "description": "Search for movies and stream / download instantly",
+    "developer_name": "Gwilym Rutherford",
+    "icon": "images/icon.png",
+    "options": {
+        "query_debounce": 0.05
+    },
+    "preferences": [
+        {
+            "id": "kw_movie",
+            "type": "keyword",
+            "name": "Movies",
+            "default_value": "movie"
+        },
+        {
+            "id": "download_path",
+            "type": "input",
+            "name": "Download Path",
+            "description": "This is where your movies will download to even when streaming",
+            "default_value": "~/Downloads/Movies"
+        },
+        {
+            "id": "order_by",
+            "type": "select",
+            "name": "Order movies",
+            "description": "Order your movies in ascending order or descending order",
+            "default_value": "desc",
+            "options": [
+                {
+                    "text": "Ascending",
+                    "value": "asc"
+                },
+                {
+                    "text": "Descending",
+                    "value": "desc"
+                }
+            ]
+        },
+        {
+            "id": "trackers",
+            "type": "text",
+            "name": "Trackers",
+            "description": "Input new trackers separeted by commas (,)",
+            "default_value": "udp://open.demonii.com:1337/announce,udp://tracker.openbittorrent.com:80,udp://tracker.coppersurfer.tk:6969,udp://glotorrents.pw:6969/announce,udp://tracker.opentrackr.org:1337/announce,udp://torrent.gresille.org:80/announce,udp://p4p.arenabg.com:1337,udp://tracker.leechers-paradise.org:6969"
+        },
+        {
+            "id": "limit",
+            "type": "input",
+            "name": "Limit search results",
+            "description": "Limit the amount of search results the top n results",
+            "default_value": "5"
+        }
+    ]
+}
