@@ -10,7 +10,7 @@
     "preferences": [
         {
             "id": "kw_movie",
-            "type": "keyword",
+            "type": "watch",
             "name": "Movies",
             "default_value": "movie"
         },
