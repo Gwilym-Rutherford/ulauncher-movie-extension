@@ -3,6 +3,13 @@
 - [VLC](https://www.videolan.org/vlc/)
 - Possibly a VPN
 
+# Download
+open ulauncher -> extensions -> add extension -> past in this
+```
+https://github.com/Gwilym-Rutherford/ulauncher-movie-extension
+```
+https://ext.ulauncher.io/-/github-gwilym-rutherford-ulauncher-movie-extension
+
 # Usage
 1. use the keyword, `watch` by default, and then the movie title
 ```
