@@ -91,7 +91,6 @@ class MovieExtension(Extension):
         logger.debug(f"Movie name: {MovieExtension.movieName}")
         
         magnet_uri = MovieExtension.build_magnet_uri(data, preferences)
-        logger.debug(f"magnet_uri: {magnet_uri}")
         subprocess.run(
             f"webtorrent '{magnet_uri}' --quiet --vlc --out '{preferences["download_path"]}'",
             shell=True)
@@ -104,10 +103,8 @@ class KeywordQueryEventListener(EventListener):
         
         base_uri = "https://yts.mx/api/v2/list_movies.json"
 
-        # add movie name
         api_uri = f"{base_uri}?query_term={urllib.parse.quote(str(movie_name))}"
-    
-        # apply all preferences to uri        
+     
         if preferences["order_by"]:
             api_uri += f"&order_by={preferences["order_by"]}"
             
@@ -122,18 +119,19 @@ class KeywordQueryEventListener(EventListener):
     def get_movies(self, api_uri, preferences):
         response = json.loads(requests.get(api_uri).text)["data"]
         all_movies = response["movies"]
-        
-        movies = dict()
-        for movie in all_movies:
-            movies[movie["title"]] = movie["torrents"]
             
-        return movies
+        return all_movies
 
 
     def on_event(self, event, extension):
         
         api_uri = self.build_api_uri(event.get_argument(), extension.preferences)
-        movies = self.get_movies(api_uri, extension.preferences)
+        all_movies = self.get_movies(api_uri, extension.preferences)
+        
+        movies = dict()
+        for movie in all_movies:
+            movies[movie["title"]] = movie["torrents"]
+        
         
         items = []
         keys = list(movies.keys())
@@ -141,7 +139,7 @@ class KeywordQueryEventListener(EventListener):
             items.append(ExtensionResultItem(
                 icon='images/icon.png',
                 name=str(movie),
-                description=api_uri,
+                description=f"{str(movie)} - {all_movies[0]["year"]}",
                 on_enter=ExtensionCustomAction(
                     {"function": "quality",
                     "data": movies[movie],
@@ -153,7 +151,6 @@ class KeywordQueryEventListener(EventListener):
 
 class ItemEnterEventHandler(EventListener):
     
-    # quality show 
     def on_event(self, event, extension):
         
         data = event.get_data()
