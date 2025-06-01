@@ -16,7 +16,7 @@ https://ext.ulauncher.io/-/github-gwilym-rutherford-ulauncher-movie-extension
 watch <movie title>
 ```
 > [!WARNING]
-> Urgent info that needs immediate user attention to avoid problems.
+> Movie name needs to be spelled correctly for film to show up
 
 2. select the movie
 3. select the quality
