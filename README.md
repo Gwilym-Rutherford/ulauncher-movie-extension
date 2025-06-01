@@ -1,7 +1,10 @@
 # Dependencies
+## mandatory
 - [Webtorrent CLI](https://github.com/webtorrent/webtorrent-cli)
 - [VLC](https://www.videolan.org/vlc/)
-- Possibly a VPN
+## optional
+- mullvad (if not mullvad then any other vpn)
+
 
 # Download
 open ulauncher -> extensions -> add extension -> past in this
