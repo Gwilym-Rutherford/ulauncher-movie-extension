@@ -118,7 +118,8 @@ class KeywordQueryEventListener(EventListener):
     
     def get_movies(self, api_uri, preferences):
         # if selected, will connect to vpn before
-        if preferences["mullvad"]:
+        logger.debug(preferences)
+        if preferences["mullvad"] == True:
             subprocess.run(f"mullvad connect --wait", shell=True)
                     
         

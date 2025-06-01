@@ -50,14 +50,14 @@
             "type": "input",
             "name": "Limit search results",
             "description": "Limit the amount of search results the top n results",
-            "default_value": "5"
+            "default_value": "7"
         },
         {
             "id": "mullvad",
             "type": "select",
-            "name": "connect to mullvad vpn",
-            "description": "If you use mullvad vpn, this will automatically connect to the vpn if you aren't already",
-            "default_value": false,
+            "name": "mullvad autoconnect",
+            "description": "If you use mullvad vpn, this will automatically connect to the vpn if you aren't already. Please make sure your vpn is running first if you aren't using mullvad",
+            "default_value": true,
             "options": [
                 {
                     "text": "Yes",
