@@ -124,9 +124,12 @@ class KeywordQueryEventListener(EventListener):
                     
         
         response = json.loads(requests.get(api_uri).text)["data"]
-        all_movies = response["movies"]
-            
-        return all_movies
+        
+        try:
+            return response["movies"]
+        except:
+            logger.info("Movie wasn't found")
+            return []
 
 
     def on_event(self, event, extension):
@@ -134,25 +137,37 @@ class KeywordQueryEventListener(EventListener):
         api_uri = self.build_api_uri(event.get_argument(), extension.preferences)
         all_movies = self.get_movies(api_uri, extension.preferences)
         
-        movies = dict()
-        for movie in all_movies:
-            movies[movie["title"]] = movie["torrents"]
-        
-        
-        items = []
-        keys = list(movies.keys())
-        for movie in keys:
-            items.append(ExtensionResultItem(
-                icon='images/icon.png',
-                name=str(movie),
-                description=f"{str(movie)} - {all_movies[0]["year"]}",
-                on_enter=ExtensionCustomAction(
-                    {"function": "quality",
-                    "data": movies[movie],
-                    "movieName": str(movie)}, keep_app_open=True))
-            )        
+        if len(all_movies) != 0:
+            movies = dict()
+            for movie in all_movies:
+                movies[movie["title"]] = movie["torrents"]
+                
+            items = []
+            keys = list(movies.keys())
+            for movie in keys:
+                items.append(ExtensionResultItem(
+                    icon='images/icon.png',
+                    name=str(movie),
+                    description=f"{str(movie)} - {all_movies[0]["year"]}",
+                    on_enter=ExtensionCustomAction(
+                        {"function": "quality",
+                        "data": movies[movie],
+                        "movieName": str(movie)}, keep_app_open=True))
+                )        
 
-        return RenderResultListAction(items)
+            return RenderResultListAction(items)
+        
+        else:
+            return RenderResultListAction([ExtensionResultItem(
+                icon='images/icon.png',
+                    name="No file was found :(",
+                    description="make sure you have the spelling correct",
+                    on_enter=HideWindowAction())
+                ])        
+            
+            
+        
+        
 
 
 class ItemEnterEventHandler(EventListener):
