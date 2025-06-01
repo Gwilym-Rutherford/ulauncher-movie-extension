@@ -10,7 +10,7 @@
     "preferences": [
         {
             "id": "kw_movie",
-            "type": "watch",
+            "type": "keyword",
             "name": "Movies",
             "default_value": "movie"
         },
@@ -19,7 +19,7 @@
             "type": "input",
             "name": "Download Path",
             "description": "This is where your movies will download to even when streaming",
-            "default_value": "Downloads/Movies"
+            "default_value": "~/Downloads/Movies"
         },
         {
             "id": "order_by",
@@ -51,6 +51,24 @@
             "name": "Limit search results",
             "description": "Limit the amount of search results the top n results",
             "default_value": "5"
+        },
+        {
+            "id": "mullvad",
+            "type": "select",
+            "name": "connect to mullvad vpn",
+            "description": "If you use mullvad vpn, this will automatically connect to the vpn if you aren't already",
+            "default_value": false,
+            "options": [
+                {
+                    "text": "Yes",
+                    "value": true
+                },
+                {
+                    "text": "No",
+                    "value": false
+                }
+            ]
         }
+
     ]
 }

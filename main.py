@@ -104,7 +104,7 @@ class KeywordQueryEventListener(EventListener):
         base_uri = "https://yts.mx/api/v2/list_movies.json"
 
         api_uri = f"{base_uri}?query_term={urllib.parse.quote(str(movie_name))}"
-     
+        
         if preferences["order_by"]:
             api_uri += f"&order_by={preferences["order_by"]}"
             
@@ -117,6 +117,11 @@ class KeywordQueryEventListener(EventListener):
         return api_uri
     
     def get_movies(self, api_uri, preferences):
+        # if selected, will connect to vpn before
+        if preferences["mullvad"]:
+            subprocess.run(f"mullvad connect --wait", shell=True)
+                    
+        
         response = json.loads(requests.get(api_uri).text)["data"]
         all_movies = response["movies"]
             
