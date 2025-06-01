@@ -19,7 +19,7 @@
             "type": "input",
             "name": "Download Path",
             "description": "This is where your movies will download to even when streaming",
-            "default_value": "~/Downloads/Movies"
+            "default_value": "Downloads/Movies"
         },
         {
             "id": "order_by",
