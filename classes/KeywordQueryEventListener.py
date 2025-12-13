@@ -17,7 +17,7 @@ class KeywordQueryEventListener(EventListener):
     def build_api_uri(self, movie_name, preferences):
         api_uri = ""
         
-        base_uri = "https://yts.mx/api/v2/list_movies.json"
+        base_uri = "https://yts.lt/api/v2/list_movies.json"
 
         api_uri = f"{base_uri}?query_term={urllib.parse.quote(str(movie_name))}"
         
