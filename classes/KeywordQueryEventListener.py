@@ -17,7 +17,7 @@ class KeywordQueryEventListener(EventListener):
     def build_api_uri(self, movie_name, preferences):
         api_uri = ""
         
-        base_uri = "https://yts.lt/api/v2/list_movies.json"
+        base_uri = f"https://{preferences["movie_source"]}/api/v2/list_movies.json"
 
         api_uri = f"{base_uri}?query_term={urllib.parse.quote(str(movie_name))}"
         
@@ -77,7 +77,7 @@ class KeywordQueryEventListener(EventListener):
             return RenderResultListAction([ExtensionResultItem(
                 icon='images/icon.png',
                     name="No file was found :(",
-                    description="Make sure you are connected to vpn, and the spelling is correct",
+                    description="Make sure you are connected to vpn,the spelling is correct and the movie source is working",
                     on_enter=DoNothingAction())
                 ])        
             

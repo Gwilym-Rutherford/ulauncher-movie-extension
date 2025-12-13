@@ -82,7 +82,7 @@ class ItemEnterEventHandler(EventListener):
         
         magnet_uri = self.build_magnet_uri(data, preferences)
         subprocess.run(
-            f"webtorrent '{magnet_uri}' --quiet --vlc --out '{preferences["download_path"]}'",
+            f"webtorrent '{magnet_uri}' --quiet --vlc --out --not-on-top '{preferences["download_path"]}'",
             shell=True)
     
     def on_event(self, event, extension):

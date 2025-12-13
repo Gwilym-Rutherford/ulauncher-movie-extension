@@ -15,6 +15,13 @@
             "default_value": "movie"
         },
         {
+            "id": "movie_source",
+            "type": "input",
+            "name": "Movie source",
+            "description": "Link to working movie website",
+            "default_value": "yts.lt"
+        },
+        {
             "id": "download_path",
             "type": "input",
             "name": "Download Path",
