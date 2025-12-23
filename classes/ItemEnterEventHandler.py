@@ -81,8 +81,10 @@ class ItemEnterEventHandler(EventListener):
         logger.debug(f"Movie name: {self.movieName}")
         
         magnet_uri = self.build_magnet_uri(data, preferences)
+        command = f"webtorrent '{magnet_uri}' --quiet --vlc --not-on-top --out '{preferences["download_path"]}'"
+        logger.debug(f"Webtorrent command: {command}")
         subprocess.run(
-            f"webtorrent '{magnet_uri}' --quiet --vlc --out --not-on-top '{preferences["download_path"]}'",
+            command,
             shell=True)
     
     def on_event(self, event, extension):
