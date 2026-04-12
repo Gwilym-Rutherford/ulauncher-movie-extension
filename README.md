@@ -1,10 +1,13 @@
+# Know issues
+- For some reason the webtorrent CLI doesn't work any more so the additional feature to copy magnet links to your clipboard has been added, I haven't tested this on other distros.
+
 # Dependencies
 ## mandatory
 - [Webtorrent CLI](https://github.com/webtorrent/webtorrent-cli)
 - [VLC](https://www.videolan.org/vlc/)
+- wl-clipboard (sudo apt install wl-clipboard)
 ## optional
 - mullvad (if not mullvad then any other vpn)
-
 
 # Download
 open ulauncher -> extensions -> add extension -> past in this

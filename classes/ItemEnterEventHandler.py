@@ -7,6 +7,7 @@ from ulauncher.api.shared.action.ExtensionCustomAction import ExtensionCustomAct
 import logging
 import urllib.parse
 import subprocess
+import pyperclip
 
 logger = logging.getLogger(__name__)
 
@@ -31,8 +32,8 @@ class ItemEnterEventHandler(EventListener):
         return items
     
     def streamSelection(self, data, preferences):
-        text = ["Stream", "Download", "Close"]
-        description = ["Stream movie right now, save to:", "Download movie to:", "Close"]
+        text = ["Stream", "Download", "Copy magnet link", "Close"]
+        description = ["Stream movie right now, save to:", "Download movie to:", "Copy magnet link to clipboard", "Close"]
         items = []
         for i in range(0, len(text)):
             if text[i] == "Close":
@@ -45,9 +46,11 @@ class ItemEnterEventHandler(EventListener):
             else:
                 if text[i] == "Download":
                     obj = {"function": "download", "data": data}
-                else:
+                elif text[i] == "Stream":
                     obj = {"function": "stream", "data": data}
-                    
+                else:
+                    obj = {"function": "copy_magnet_link", "data": data}
+
                 items.append(ExtensionResultItem(
                     icon='images/menu.png',
                     name=text[i],
@@ -86,6 +89,11 @@ class ItemEnterEventHandler(EventListener):
         subprocess.run(
             command,
             shell=True)
+
+    def copy_magnet_link(self, data, preferences):
+        magnet_uri = self.build_magnet_uri(data, preferences)
+        pyperclip.set_clipboard('wl-clipboard')
+        pyperclip.copy(magnet_uri)
     
     def on_event(self, event, extension):
         
@@ -103,11 +111,14 @@ class ItemEnterEventHandler(EventListener):
         elif data["function"] == "stream":
             self.stream(data["data"], extension.preferences)
             return ExtensionCustomAction(data={}, keep_app_open=False)
+        elif data["function"] == "copy_magnet_link":
+            self.copy_magnet_link(data["data"], extension.preferences)
+            return ExtensionCustomAction(data={}, keep_app_open=False)
         else:
             items = (ExtensionResultItem(
                         icon='images/menu.png',
                         name="Seems to be an error",
-                        description="You can try restaring",
+                        description="You can try restarting",
                         on_enter=HideWindowAction())
                      )
         
